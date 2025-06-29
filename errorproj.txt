@@ -1,0 +1,19 @@
+WeeklyReport.tsx:172 Uncaught ReferenceError: handleShare is not defined
+    at WeeklyReport (WeeklyReport.tsx:172:22)
+
+WeeklyReport.tsx:172 Uncaught ReferenceError: handleShare is not defined
+    at WeeklyReport (WeeklyReport.tsx:172:22)
+react-dom_client.js?v=0219cbec:14032 The above error occurred in the <WeeklyReport> component:
+
+    at WeeklyReport (http://localhost:5173/src/components/WeeklyReport.tsx:22:32)
+    at main
+    at div
+    at App (http://localhost:5173/src/App.tsx:31:37)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+react-dom_client.js?v=0219cbec:9129 Uncaught ReferenceError: handleShare is not defined
+    at WeeklyReport (WeeklyReport.tsx:172:22)
+
+﻿
+
