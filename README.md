@@ -4,61 +4,61 @@ Smart Receipts Tracker is an AI-powered expense management application designed 
 
 ## Features
 
--   **User Authentication**: Secure sign-up, sign-in, and user management using AWS Cognito User Pools and Identity Pools.
--   **AI-Powered Receipt Processing**: Upload receipt images, and AWS Bedrock (Claude 3 Haiku) automatically extracts vendor, amount, category, description, and date.
--   **Expense Management**: Add, view, edit, and delete expense records.
--   **Data Persistence**: All expense data is stored in Amazon DynamoDB.
--   **Receipt Image Storage**: Uploaded receipt images are securely stored in Amazon S3.
--   **Dynamic Data Display**: Dashboard, Expense Details, and Weekly Reports dynamically fetch and display data from DynamoDB.
--   **Weekly Spending Reports**: Visualize weekly spending patterns, compare against a budget, and break down expenses by category.
--   **Tax Calendar**: View expenses organized by date in a calendar format (week, month, year views).
--   **Tax Data Export**: Export expense data for tax purposes as a CSV file.
--   **Receipt Image Download**: Download original receipt images from S3 via pre-signed URLs.
+- **User Authentication**: Secure sign-up, sign-in, and user management using AWS Cognito User Pools and Identity Pools.
+- **AI-Powered Receipt Processing**: Upload receipt images, and AWS Bedrock (Claude 3 Haiku) automatically extracts vendor, amount, category, description, and date.
+- **Expense Management**: Add, view, edit, and delete expense records.
+- **Data Persistence**: All expense data is stored in Amazon DynamoDB.
+- **Receipt Image Storage**: Uploaded receipt images are securely stored in Amazon S3.
+- **Dynamic Data Display**: Dashboard, Expense Details, and Weekly Reports dynamically fetch and display data from DynamoDB.
+- **Weekly Spending Reports**: Visualize weekly spending patterns, compare against a budget, and break down expenses by category.
+- **Tax Calendar**: View expenses organized by date in a calendar format (week, month, year views).
+- **Tax Data Export**: Export expense data for tax purposes as a CSV file.
+- **Receipt Image Download**: Download original receipt images from S3 via pre-signed URLs.
 
 ## Technologies Used
 
 ### Frontend
 
--   **React**: A JavaScript library for building user interfaces.
--   **Vite**: A fast build tool for modern web projects.
--   **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
--   **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
--   **Lucide React**: A collection of beautiful open-source icons.
--   **AWS SDK for JavaScript**: For interacting with AWS services from the frontend.
+- **React**: A JavaScript library for building user interfaces.
+- **Vite**: A fast build tool for modern web projects.
+- **TypeScript**: A typed superset of JavaScript that compiles to plain JavaScript.
+- **Tailwind CSS**: A utility-first CSS framework for rapidly building custom designs.
+- **Lucide React**: A collection of beautiful open-source icons.
+- **AWS SDK for JavaScript**: For interacting with AWS services from the frontend.
 
 ### Backend (AWS Lambda - Python)
 
--   **Python 3.9**: Runtime for Lambda functions.
--   **Boto3**: AWS SDK for Python.
--   **Lambda Functions**:
-    -   `UploadImageLambda`: Handles uploading base64 encoded images to S3.
-    -   `BedrockCategorizationLambda`: Extracts expense details from images using AWS Bedrock.
-    -   `SaveExpenseLambda`: Saves new expense records to DynamoDB.
-    -   `GetExpensesLambda`: Fetches expense records from DynamoDB.
-    -   `UpdateExpenseLambda`: Updates existing expense records in DynamoDB.
-    -   `DeleteExpenseLambda`: Deletes expense records from DynamoDB.
-    -   `GetPresignedUrlLambda`: Generates pre-signed URLs for S3 objects.
+- **Python 3.9**: Runtime for Lambda functions.
+- **Boto3**: AWS SDK for Python.
+- **Lambda Functions**:
+  - `UploadImageLambda`: Handles uploading base64 encoded images to S3.
+  - `BedrockCategorizationLambda`: Extracts expense details from images using AWS Bedrock.
+  - `SaveExpenseLambda`: Saves new expense records to DynamoDB.
+  - `GetExpensesLambda`: Fetches expense records from DynamoDB.
+  - `UpdateExpenseLambda`: Updates existing expense records in DynamoDB.
+  - `DeleteExpenseLambda`: Deletes expense records from DynamoDB.
+  - `GetPresignedUrlLambda`: Generates pre-signed URLs for S3 objects.
 
 ### AWS Services
 
--   **Amazon Cognito User Pools**: For user authentication (sign-up, sign-in).
--   **Amazon Cognito Identity Pools**: For authorizing frontend access to AWS resources (Lambda, S3, DynamoDB).
--   **Amazon S3**: For storing uploaded receipt images and hosting the frontend application.
--   **Amazon DynamoDB**: A NoSQL database for storing structured expense data.
--   **AWS Lambda**: Serverless compute service for backend logic.
--   **Amazon Bedrock**: AI service for extracting data from receipt images (using Claude 3 Haiku).
--   **AWS IAM**: For managing permissions and access control.
--   **Amazon CloudWatch**: For monitoring and logging Lambda function invocations.
+- **Amazon Cognito User Pools**: For user authentication (sign-up, sign-in).
+- **Amazon Cognito Identity Pools**: For authorizing frontend access to AWS resources (Lambda, S3, DynamoDB).
+- **Amazon S3**: For storing uploaded receipt images and hosting the frontend application.
+- **Amazon DynamoDB**: A NoSQL database for storing structured expense data.
+- **AWS Lambda**: Serverless compute service for backend logic.
+- **Amazon Bedrock**: AI service for extracting data from receipt images (using Claude 3 Haiku).
+- **AWS IAM**: For managing permissions and access control.
+- **Amazon CloudWatch**: For monitoring and logging Lambda function invocations.
 
 ## Setup Instructions
 
 ### Prerequisites
 
--   [Node.js](https://nodejs.org/en/) (LTS version recommended)
--   [npm](https://www.npmjs.com/) (comes with Node.js)
--   [Python 3.9+](https://www.python.org/downloads/)
--   [AWS CLI](https://aws.amazon.com/cli/) configured with appropriate credentials and a default region (e.g., `us-east-1`).
--   Access to AWS Bedrock (specifically `anthropic.claude-3-haiku-20240307-v1:0`) enabled in your AWS account.
+- [Node.js](https://nodejs.org/en/) (LTS version recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
+- [Python 3.9+](https://www.python.org/downloads/)
+- [AWS CLI](https://aws.amazon.com/cli/) configured with appropriate credentials and a default region (e.g., `us-east-1`).
+- Access to AWS Bedrock (specifically `anthropic.claude-3-haiku-20240307-v1:0`) enabled in your AWS account.
 
 ### 1. AWS Backend Setup
 
@@ -137,7 +137,7 @@ Attach inline policy for S3 and DynamoDB (replace bucket name and region):
 aws iam put-role-policy \
     --role-name SmartReceiptsLambdaRole \
     --policy-name S3DynamoDBAccessPolicy \
-    --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:PutObject","s3:GetObject"],"Resource":"arn:aws:s3:::smart-receipts-images-your-unique-id/*"},{"Effect":"Allow","Action":["dynamodb:PutItem","dynamodb:GetItem","dynamodb:UpdateItem","dynamodb:Query","dynamodb:DeleteItem"],"Resource":"arn:aws:dynamodb:us-east-1:442042523577:table/SmartReceiptsExpenses"}]}'
+    --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["s3:PutObject","s3:GetObject"],"Resource":"arn:aws:s3:::smart-receipts-images-your-unique-id/*"},{"Effect":"Allow","Action":["dynamodb:PutItem","dynamodb:GetItem","dynamodb:UpdateItem","dynamodb:Query","dynamodb:DeleteItem"],"Resource":"arn:aws:dynamodb:us-east-1:AWSAccount:table/SmartReceiptsExpenses"}]}'
 ```
 
 **Cognito User Pool Role (`CognitoAuthRole`)**:
@@ -145,7 +145,7 @@ aws iam put-role-policy \
 ```bash
 aws iam create-role \
     --role-name CognitoAuthRole \
-    --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Federated":"cognito-identity.amazonaws.com"},"Action":"sts:AssumeRoleWithWebIdentity","Condition":{"StringEquals":{"cognito-identity.amazonaws.com:aud":"us-east-1:045a79c1-2266-432a-ae13-9902545461fb"},"ForAnyValue:StringLike":{"cognito-identity.amazonaws.com:amr":["authenticated"]}}}]}' \
+    --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Federated":"cognito-identity.amazonaws.com"},"Action":"sts:AssumeRoleWithWebIdentity","Condition":{"StringEquals":{"cognito-identity.amazonaws.com:aud":"us-east-1:unique_random"},"ForAnyValue:StringLike":{"cognito-identity.amazonaws.com:amr":["authenticated"]}}}]}' \
     --description "IAM role for authenticated Cognito Identity Pool users."
 ```
 
@@ -154,7 +154,7 @@ aws iam create-role \
 ```bash
 aws iam create-role \
     --role-name CognitoUnauthRole \
-    --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Federated":"cognito-identity.amazonaws.com"},"Action":"sts:AssumeRoleWithWebIdentity","Condition":{"StringEquals":{"cognito-identity.amazonaws.com:aud":"us-east-1:045a79c1-2266-432a-ae13-9902545461fb"},"ForAnyValue:StringLike":{"cognito-identity.amazonaws.com:amr":["unauthenticated"]}}}]}' \
+    --assume-role-policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Principal":{"Federated":"cognito-identity.amazonaws.com"},"Action":"sts:AssumeRoleWithWebIdentity","Condition":{"StringEquals":{"cognito-identity.amazonaws.com:aud":"us-east-1:unique_random"},"ForAnyValue:StringLike":{"cognito-identity.amazonaws.com:amr":["unauthenticated"]}}}]}' \
     --description "IAM role for unauthenticated Cognito Identity Pool users."
 ```
 
@@ -162,8 +162,8 @@ Set Identity Pool roles:
 
 ```bash
 aws cognito-identity set-identity-pool-roles \
-    --identity-pool-id us-east-1:045a79c1-2266-432a-ae13-9902545461fb \
-    --roles authenticated=arn:aws:iam::442042523577:role/CognitoAuthRole,unauthenticated=arn:aws:iam::442042523577:role/CognitoUnauthRole
+    --identity-pool-id us-east-1:unique_random \
+    --roles authenticated=arn:aws:iam::AWSAccount:role/CognitoAuthRole,unauthenticated=arn:aws:iam::AWSAccount:role/CognitoUnauthRole
 ```
 
 Attach Lambda Invoke Policy to `CognitoAuthRole`:
@@ -172,7 +172,7 @@ Attach Lambda Invoke Policy to `CognitoAuthRole`:
 aws iam put-role-policy \
     --role-name CognitoAuthRole \
     --policy-name InvokeLambdaPolicy \
-    --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["lambda:InvokeFunction"],"Resource":["arn:aws:lambda:us-east-1:442042523577:function:UploadImageLambda","arn:aws:lambda:us-east-1:442042523577:function:BedrockCategorizationLambda","arn:aws:lambda:us-east-1:442042523577:function:SaveExpenseLambda","arn:aws:lambda:us-east-1:442042523577:function:GetExpensesLambda","arn:aws:lambda:us-east-1:442042523577:function:UpdateExpenseLambda","arn:aws:lambda:us-east-1:442042523577:function:DeleteExpenseLambda","arn:aws:lambda:us-east-1:442042523577:function:GetPresignedUrlLambda"]}]}'
+    --policy-document '{"Version":"2012-10-17","Statement":[{"Effect":"Allow","Action":["lambda:InvokeFunction"],"Resource":["arn:aws:lambda:us-east-1:AWSAccount:function:UploadImageLambda","arn:aws:lambda:us-east-1:AWSAccount:function:BedrockCategorizationLambda","arn:aws:lambda:us-east-1:AWSAccount:function:SaveExpenseLambda","arn:aws:lambda:us-east-1:AWSAccount:function:GetExpensesLambda","arn:aws:lambda:us-east-1:AWSAccount:function:UpdateExpenseLambda","arn:aws:lambda:us-east-1:AWSAccount:function:DeleteExpenseLambda","arn:aws:lambda:us-east-1:AWSAccount:function:GetPresignedUrlLambda"]}]}'
 ```
 
 #### e. Deploy Lambda Functions
@@ -189,7 +189,7 @@ Package and deploy each Lambda function:
 
 ```bash
 zip upload_image_lambda.zip upload_image_lambda.py
-aws lambda create-function --function-name UploadImageLambda --runtime python3.9 --handler upload_image_lambda.lambda_handler --role arn:aws:iam::442042523577:role/SmartReceiptsLambdaRole --zip-file fileb://upload_image_lambda.zip --environment Variables={S3_BUCKET_NAME=smart-receipts-images-your-unique-id} --timeout 30 --memory-size 128
+aws lambda create-function --function-name UploadImageLambda --runtime python3.9 --handler upload_image_lambda.lambda_handler --role arn:aws:iam::AWSAccount:role/SmartReceiptsLambdaRole --zip-file fileb://upload_image_lambda.zip --environment Variables={S3_BUCKET_NAME=smart-receipts-images-your-unique-id} --timeout 30 --memory-size 128
 # To update:
 aws lambda update-function-code --function-name UploadImageLambda --zip-file fileb://upload_image_lambda.zip
 ```
@@ -198,7 +198,7 @@ aws lambda update-function-code --function-name UploadImageLambda --zip-file fil
 
 ```bash
 zip bedrock_categorization_lambda.zip bedrock_categorization_lambda.py
-aws lambda create-function --function-name BedrockCategorizationLambda --runtime python3.9 --handler bedrock_categorization_lambda.lambda_handler --role arn:aws:iam::442042523577:role/SmartReceiptsLambdaRole --zip-file fileb://bedrock_categorization_lambda.zip --environment Variables={S3_BUCKET_NAME=smart-receipts-images-your-unique-id} --timeout 60 --memory-size 512
+aws lambda create-function --function-name BedrockCategorizationLambda --runtime python3.9 --handler bedrock_categorization_lambda.lambda_handler --role arn:aws:iam::AWSAccount:role/SmartReceiptsLambdaRole --zip-file fileb://bedrock_categorization_lambda.zip --environment Variables={S3_BUCKET_NAME=smart-receipts-images-your-unique-id} --timeout 60 --memory-size 512
 # To update:
 aws lambda update-function-code --function-name BedrockCategorizationLambda --zip-file fileb://bedrock_categorization_lambda.zip
 ```
@@ -207,7 +207,7 @@ aws lambda update-function-code --function-name BedrockCategorizationLambda --zi
 
 ```bash
 zip save_expense_lambda.zip save_expense_lambda.py
-aws lambda create-function --function-name SaveExpenseLambda --runtime python3.9 --handler save_expense_lambda.lambda_handler --role arn:aws:iam::442042523577:role/SmartReceiptsLambdaRole --zip-file fileb://save_expense_lambda.zip --environment Variables={DYNAMODB_TABLE_NAME=SmartReceiptsExpenses} --timeout 30 --memory-size 128
+aws lambda create-function --function-name SaveExpenseLambda --runtime python3.9 --handler save_expense_lambda.lambda_handler --role arn:aws:iam::AWSAccount:role/SmartReceiptsLambdaRole --zip-file fileb://save_expense_lambda.zip --environment Variables={DYNAMODB_TABLE_NAME=SmartReceiptsExpenses} --timeout 30 --memory-size 128
 # To update:
 aws lambda update-function-code --function-name SaveExpenseLambda --zip-file fileb://save_expense_lambda.zip
 ```
@@ -216,7 +216,7 @@ aws lambda update-function-code --function-name SaveExpenseLambda --zip-file fil
 
 ```bash
 zip get_expenses_lambda.zip get_expenses_lambda.py
-aws lambda create-function --function-name GetExpensesLambda --runtime python3.9 --handler get_expenses_lambda.lambda_handler --role arn:aws:iam::442042523577:role/SmartReceiptsLambdaRole --zip-file fileb://get_expenses_lambda.zip --environment Variables={DYNAMODB_TABLE_NAME=SmartReceiptsExpenses} --timeout 30 --memory-size 128
+aws lambda create-function --function-name GetExpensesLambda --runtime python3.9 --handler get_expenses_lambda.lambda_handler --role arn:aws:iam::AWSAccount:role/SmartReceiptsLambdaRole --zip-file fileb://get_expenses_lambda.zip --environment Variables={DYNAMODB_TABLE_NAME=SmartReceiptsExpenses} --timeout 30 --memory-size 128
 # To update:
 aws lambda update-function-code --function-name GetExpensesLambda --zip-file fileb://get_expenses_lambda.zip
 ```
@@ -225,7 +225,7 @@ aws lambda update-function-code --function-name GetExpensesLambda --zip-file fil
 
 ```bash
 zip update_expense_lambda.zip update_expense_lambda.py
-aws lambda create-function --function-name UpdateExpenseLambda --runtime python3.9 --handler update_expense_lambda.lambda_handler --role arn:aws:iam::442042523577:role/SmartReceiptsLambdaRole --zip-file fileb://update_expense_lambda.zip --environment Variables={DYNAMODB_TABLE_NAME=SmartReceiptsExpenses} --timeout 30 --memory-size 128
+aws lambda create-function --function-name UpdateExpenseLambda --runtime python3.9 --handler update_expense_lambda.lambda_handler --role arn:aws:iam::AWSAccount:role/SmartReceiptsLambdaRole --zip-file fileb://update_expense_lambda.zip --environment Variables={DYNAMODB_TABLE_NAME=SmartReceiptsExpenses} --timeout 30 --memory-size 128
 # To update:
 aws lambda update-function-code --function-name UpdateExpenseLambda --zip-file fileb://update_expense_lambda.zip
 ```
@@ -234,7 +234,7 @@ aws lambda update-function-code --function-name UpdateExpenseLambda --zip-file f
 
 ```bash
 zip delete_expense_lambda.zip delete_expense_lambda.py
-aws lambda create-function --function-name DeleteExpenseLambda --runtime python3.9 --handler delete_expense_lambda.lambda_handler --role arn:aws:iam::442042523577:role/SmartReceiptsLambdaRole --zip-file fileb://delete_expense_lambda.zip --environment Variables={DYNAMODB_TABLE_NAME=SmartReceiptsExpenses} --timeout 30 --memory-size 128
+aws lambda create-function --function-name DeleteExpenseLambda --runtime python3.9 --handler delete_expense_lambda.lambda_handler --role arn:aws:iam::AWSAccount:role/SmartReceiptsLambdaRole --zip-file fileb://delete_expense_lambda.zip --environment Variables={DYNAMODB_TABLE_NAME=SmartReceiptsExpenses} --timeout 30 --memory-size 128
 # To update:
 aws lambda update-function-code --function-name DeleteExpenseLambda --zip-file fileb://delete_expense_lambda.zip
 ```
@@ -243,7 +243,7 @@ aws lambda update-function-code --function-name DeleteExpenseLambda --zip-file f
 
 ```bash
 zip get_presigned_url_lambda.zip get_presigned_url_lambda.py
-aws lambda create-function --function-name GetPresignedUrlLambda --runtime python3.9 --handler get_presigned_url_lambda.lambda_handler --role arn:aws:iam::442042523577:role/SmartReceiptsLambdaRole --zip-file fileb://get_presigned_url_lambda.zip --environment Variables={S3_BUCKET_NAME=smart-receipts-images-your-unique-id} --timeout 30 --memory-size 128
+aws lambda create-function --function-name GetPresignedUrlLambda --runtime python3.9 --handler get_presigned_url_lambda.lambda_handler --role arn:aws:iam::AWSAccount:role/SmartReceiptsLambdaRole --zip-file fileb://get_presigned_url_lambda.zip --environment Variables={S3_BUCKET_NAME=smart-receipts-images-your-unique-id} --timeout 30 --memory-size 128
 # To update:
 aws lambda update-function-code --function-name GetPresignedUrlLambda --zip-file fileb://get_presigned_url_lambda.zip
 ```
@@ -341,5 +341,3 @@ Your application will be accessible via the S3 static website hosting endpoint (
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues.
-
-
