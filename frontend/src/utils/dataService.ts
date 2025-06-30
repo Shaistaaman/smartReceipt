@@ -30,3 +30,7 @@ export const deleteExpense = async (expenseId: string, userId: string): Promise<
     throw error;
   }
 };
+
+export const updateUserPreferences = async (userId: string, notificationsEnabled: boolean): Promise<void> => {
+  await invokeLambda('UpdateUserPreferencesLambda', { userId, notificationsEnabled });
+};

@@ -1,19 +1,47 @@
-WeeklyReport.tsx:172 Uncaught ReferenceError: handleShare is not defined
-    at WeeklyReport (WeeklyReport.tsx:172:22)
+No older events at this moment. 
+Retry
+2025-06-30T19:31:39.243Z
+INIT_START Runtime Version: python:3.9.v99	Runtime Version ARN: arn:aws:lambda:us-east-1::runtime:bb621aef6cc9508f1875aa986531f956f051c1280d7f97986e28a224ae44186e
 
-WeeklyReport.tsx:172 Uncaught ReferenceError: handleShare is not defined
-    at WeeklyReport (WeeklyReport.tsx:172:22)
-react-dom_client.js?v=0219cbec:14032 The above error occurred in the <WeeklyReport> component:
+INIT_START Runtime Version: python:3.9.v99 Runtime Version ARN: arn:aws:lambda:us-east-1::runtime:bb621aef6cc9508f1875aa986531f956f051c1280d7f97986e28a224ae44186e
+2025-06-30T19:31:39.341Z
+[WARNING]	2025-06-30T19:31:39.340Z		LAMBDA_WARNING: Unhandled exception. The most likely cause is an issue in the function code. However, in rare cases, a Lambda runtime update can cause unexpected function behavior. For functions using managed runtimes, runtime updates can be triggered by a function change, or can be applied automatically. To determine if the runtime has been updated, check the runtime version in the INIT_START log entry. If this error correlates with a change in the runtime version, you may be able to mitigate this error by temporarily rolling back to the previous runtime version. For more information, see https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
 
-    at WeeklyReport (http://localhost:5173/src/components/WeeklyReport.tsx:22:32)
-    at main
-    at div
-    at App (http://localhost:5173/src/App.tsx:31:37)
+[WARNING] 2025-06-30T19:31:39.340Z LAMBDA_WARNING: Unhandled exception. The most likely cause is an issue in the function code. However, in rare cases, a Lambda runtime update can cause unexpected function behavior. For functions using managed runtimes, runtime updates can be triggered by a function change, or can be applied automatically. To determine if the runtime has been updated, check the runtime version in the INIT_START log entry. If this error correlates with a change in the runtime version, you may be able to mitigate this error by temporarily rolling back to the previous runtime version. For more information, see https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
+2025-06-30T19:31:39.341Z
+[ERROR] Runtime.ImportModuleError: Unable to import module 'update_user_preferences_lambda': No module named 'update_user_preferences_lambda'
+Traceback (most recent call last):
 
-Consider adding an error boundary to your tree to customize error handling behavior.
-Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
-react-dom_client.js?v=0219cbec:9129 Uncaught ReferenceError: handleShare is not defined
-    at WeeklyReport (WeeklyReport.tsx:172:22)
+[ERROR] Runtime.ImportModuleError: Unable to import module 'update_user_preferences_lambda': No module named 'update_user_preferences_lambda' Traceback (most recent call last):
+2025-06-30T19:31:39.404Z
+INIT_REPORT Init Duration: 161.32 ms	Phase: init	Status: error	Error Type: Runtime.ImportModuleError
 
-﻿
+INIT_REPORT Init Duration: 161.32 ms Phase: init Status: error Error Type: Runtime.ImportModuleError
+2025-06-30T19:31:39.462Z
+[WARNING]	2025-06-30T19:31:39.462Z		LAMBDA_WARNING: Unhandled exception. The most likely cause is an issue in the function code. However, in rare cases, a Lambda runtime update can cause unexpected function behavior. For functions using managed runtimes, runtime updates can be triggered by a function change, or can be applied automatically. To determine if the runtime has been updated, check the runtime version in the INIT_START log entry. If this error correlates with a change in the runtime version, you may be able to mitigate this error by temporarily rolling back to the previous runtime version. For more information, see https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
 
+[WARNING] 2025-06-30T19:31:39.462Z LAMBDA_WARNING: Unhandled exception. The most likely cause is an issue in the function code. However, in rare cases, a Lambda runtime update can cause unexpected function behavior. For functions using managed runtimes, runtime updates can be triggered by a function change, or can be applied automatically. To determine if the runtime has been updated, check the runtime version in the INIT_START log entry. If this error correlates with a change in the runtime version, you may be able to mitigate this error by temporarily rolling back to the previous runtime version. For more information, see https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
+2025-06-30T19:31:39.462Z
+[ERROR] Runtime.ImportModuleError: Unable to import module 'update_user_preferences_lambda': No module named 'update_user_preferences_lambda'
+Traceback (most recent call last):
+
+[ERROR] Runtime.ImportModuleError: Unable to import module 'update_user_preferences_lambda': No module named 'update_user_preferences_lambda' Traceback (most recent call last):
+2025-06-30T19:31:39.506Z
+INIT_REPORT Init Duration: 88.49 ms	Phase: invoke	Status: error	Error Type: Runtime.ImportModuleError
+
+INIT_REPORT Init Duration: 88.49 ms Phase: invoke Status: error Error Type: Runtime.ImportModuleError
+2025-06-30T19:31:39.506Z
+START RequestId: 27e5a425-30ee-4824-86f7-6be297a71023 Version: $LATEST
+
+START RequestId: 27e5a425-30ee-4824-86f7-6be297a71023 Version: $LATEST
+2025-06-30T19:31:39.511Z
+END RequestId: 27e5a425-30ee-4824-86f7-6be297a71023
+
+END RequestId: 27e5a425-30ee-4824-86f7-6be297a71023
+2025-06-30T19:31:39.511Z
+REPORT RequestId: 27e5a425-30ee-4824-86f7-6be297a71023 Duration: 100.64 ms Billed Duration: 101 ms Memory Size: 128 MB Max Memory Used: 39 MB Status: error Error Type: Runtime.ImportModuleError
+No newer events at this moment. 
+Auto retry paused.
+ 
+Resume
+ 

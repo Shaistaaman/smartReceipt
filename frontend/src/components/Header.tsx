@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Receipt, BarChart3, Settings, LogOut, User, Calendar } from 'lucide-react';
 import { User as UserType } from '../types/auth';
 import { TaxCalendar } from './TaxCalendar';
+import { SettingsModal } from './SettingsModal';
+import { updateUserPreferences } from '../utils/dataService';
+import { invokeLambda } from '../utils/lambda';
 
 interface HeaderProps {
   currentScreen: string;
@@ -12,6 +15,26 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ currentScreen, onScreenChange, user, onLogout }) => {
   const [showTaxCalendar, setShowTaxCalendar] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      // Fetch user preferences when the component mounts
+      invokeLambda('GetUserPreferencesLambda', { userId: user.id }).then(response => {
+        if (response.preferences) {
+          setNotificationsEnabled(response.preferences.notificationsEnabled);
+        }
+      });
+    }
+  }, [user]);
+
+  const handleNotificationsChange = async (enabled: boolean) => {
+    if (user) {
+      setNotificationsEnabled(enabled);
+      await updateUserPreferences(user.id, enabled);
+    }
+  };
 
   const navItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
@@ -76,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({ currentScreen, onScreenChange, u
                   </button>
                 </div>
               )}
-              <button className="p-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors">
+              <button onClick={() => setShowSettingsModal(true)} className="p-2 text-gray-600 hover:text-purple-600 hover:bg-purple-50 rounded-lg transition-colors">
                 <Settings className="w-5 h-5" />
               </button>
             </div>
@@ -92,6 +115,14 @@ export const Header: React.FC<HeaderProps> = ({ currentScreen, onScreenChange, u
           userId={user.id}
         />
       )}
+
+      {/* Settings Modal */}
+      <SettingsModal
+        isOpen={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
+        notificationsEnabled={notificationsEnabled}
+        onNotificationsChange={handleNotificationsChange}
+      />
     </>
   );
 };

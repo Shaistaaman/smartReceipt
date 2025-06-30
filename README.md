@@ -49,6 +49,8 @@ Smart Receipts Tracker is an AI-powered expense management application designed 
 - **Amazon Bedrock**: AI service for extracting data from receipt images (using Claude 3 Haiku).
 - **AWS IAM**: For managing permissions and access control.
 - **Amazon CloudWatch**: For monitoring and logging Lambda function invocations.
+- **Amazon EventBridge**: For scheduling daily notification triggers.
+- **Amazon SES**: For sending email notifications.
 
 ## Setup Instructions
 
@@ -338,6 +340,6 @@ Your application will be accessible via the S3 static website hosting endpoint (
 5.  **Weekly Reports**: Monitor your spending with weekly summaries and category breakdowns.
 6.  **Tax Calendar**: View expenses by date and export tax data.
 
-## Contributing
+### 10. Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues.

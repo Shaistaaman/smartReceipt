@@ -34,6 +34,9 @@ cloud "AWS Cloud" as AWS #lightgray {
     component "UpdateExpenseLambda" as UpdateExpense
     component "DeleteExpenseLambda" as DeleteExpense
     component "GetPresignedUrlLambda" as GetPresignedUrl
+    component "UpdateUserPreferencesLambda" as UpdateUserPreferences
+    component "GetUserPreferencesLambda" as GetUserPreferences
+    component "SendNotificationLambda" as SendNotification
   }
 
   rectangle "Amazon S3" as S3 #yellow {
@@ -43,10 +46,19 @@ cloud "AWS Cloud" as AWS #lightgray {
 
   rectangle "Amazon DynamoDB" as DynamoDB #green {
     component "SmartReceiptsExpenses Table" as DynamoDBTable
+    component "SmartReceiptsUsers Table" as UsersTable
   }
 
   rectangle "Amazon Bedrock" as Bedrock #purple {
     component "Claude 3 Model" as Claude3
+  }
+
+  rectangle "Amazon EventBridge" as EventBridge #blue {
+    component "Scheduled Rule" as ScheduledRule
+  }
+
+  rectangle "Amazon SES" as SES #teal {
+    component "Email Service" as EmailService
   }
 }
 
@@ -63,6 +75,15 @@ GetExpenses --> DynamoDBTable : Fetches Expense Data
 UpdateExpense --> DynamoDBTable : Updates Expense Data
 DeleteExpense --> DynamoDBTable : Deletes Expense Data
 GetPresignedUrl --> S3Bucket : Generates Presigned URL
+
+UI --> UpdateUserPreferences : Updates User Preferences
+UI --> GetUserPreferences : Fetches User Preferences
+UpdateUserPreferences --> UsersTable : Saves Preferences
+GetUserPreferences --> UsersTable : Reads Preferences
+
+ScheduledRule --> SendNotification : Triggers Daily
+SendNotification --> UsersTable : Scans for Users
+SendNotification --> EmailService : Sends Emails
 
 @enduml
 
@@ -230,5 +251,10 @@ These functions will contain the core business logic.
 ### 2. Monitoring and Logging
 
 *   **Amazon CloudWatch**: Monitor Lambda function invocations, errors, and performance. Set up alarms for critical metrics.
+
+### 3. Event-Driven Notifications
+
+*   **Amazon EventBridge**: Used to schedule daily invocations of the `SendNotificationLambda` function.
+*   **Amazon SES**: Utilized by `SendNotificationLambda` to send email reminders to users.
 
 This architecture provides a robust, scalable, and serverless solution for your Smart Receipts Tracker application.
